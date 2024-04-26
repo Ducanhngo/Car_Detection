@@ -6,19 +6,47 @@ const roommates = [
     { name: 'Diana', routine: '7:00 AM - Wake up, 8:00 AM - Breakfast, 9:00 AM - Exercise' }
 ];
 
-function findRoommates() {
-    const userRoutine = document.getElementById('routine').value.trim();
-    const matches = roommates.filter(roommate => isSimilarRoutine(roommate.routine, userRoutine));
+// Function to find roommates with similar routines
+function findRoommates(userRoutine) {
+    // Convert user routine to lowercase for case-insensitive comparison
+    userRoutine = userRoutine.toLowerCase().trim();
 
-    displayMatches(matches);
+    // Filter roommates based on routine similarity
+    const matches = roommates.filter(roommate => isSimilarRoutine(roommate.routine.toLowerCase(), userRoutine));
+
+    return matches;
 }
 
+// Function to check if two routines are similar
 function isSimilarRoutine(routine1, routine2) {
-    // Here you would implement a more sophisticated algorithm to compare routines
-    // For simplicity, we'll just check if the routines are exactly the same
-    return routine1 === routine2;
+    // Split routines into individual activities
+    const activities1 = routine1.split(',').map(activity => activity.trim());
+    const activities2 = routine2.split(',').map(activity => activity.trim());
+
+    // Check if the number of activities is the same
+    if (activities1.length !== activities2.length) {
+        return false;
+    }
+
+    // Check if each activity in routine1 exists in routine2
+    for (let activity of activities1) {
+        if (!activities2.includes(activity)) {
+            return false;
+        }
+    }
+
+    // Check if each activity in routine2 exists in routine1 (to ensure bidirectional similarity)
+    for (let activity of activities2) {
+        if (!activities1.includes(activity)) {
+            return false;
+        }
+    }
+
+    // If both routines have the same activities, they are considered similar
+    return true;
 }
 
+// Function to display matching roommates
 function displayMatches(matches) {
     const resultsContainer = document.getElementById('results');
     resultsContainer.innerHTML = '';
@@ -36,3 +64,11 @@ function displayMatches(matches) {
     });
     resultsContainer.appendChild(ul);
 }
+
+// Event listener for the "Find Roommates" button
+document.getElementById('find-roommates-btn').addEventListener('click', () => {
+    const userRoutine = document.getElementById('routine').value;
+    const matches = findRoommates(userRoutine);
+
+    displayMatches(matches);
+});
