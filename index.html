@@ -3,26 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roommate Matcher</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Feed</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Roommate Matcher</h1>
+        <h1>My Feed</h1>
     </header>
     <main>
-        <div class="form-container">
-            <label for="routine">Enter Your Daily Routine:</label>
-            <textarea id="routine" rows="4" cols="50"></textarea>
-            <button onclick="findRoommates()">Find Roommates</button>
+        <div id="post-form">
+            <textarea id="post-content" placeholder="What's on your mind?"></textarea>
+            <button onclick="submitPost()">Post</button>
         </div>
-        <div id="results">
-            <!-- Results will be displayed here -->
+        <div id="feed">
+            <!-- Posts will be displayed here -->
         </div>
     </main>
-    <footer>
-        <p>&copy; 2024 Roommate Matcher</p>
-    </footer>
     <script src="script.js"></script>
 </body>
 </html>
