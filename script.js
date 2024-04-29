@@ -1,13 +1,12 @@
-function submitPost() {
-    const postContent = document.getElementById('post-content').value.trim();
-    if (postContent === '') {
-        alert('Please enter your post content.');
-        return;
+// Same JavaScript functions as before
+
+function openTab(tabName) {
+    // Hide all tab content
+    const tabContents = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active');
     }
-    const feed = document.getElementById('feed');
-    const postElement = document.createElement('div');
-    postElement.classList.add('post');
-    postElement.textContent = postContent;
-    feed.prepend(postElement); // Add post at the beginning of the feed
-    // Optionally, you can send the post content to a backend server for storage
+
+    // Show the selected tab content
+    document.getElementById(tabName).classList.add('active');
 }
